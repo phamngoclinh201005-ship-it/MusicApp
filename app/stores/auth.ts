@@ -54,6 +54,17 @@ export const useAuthStore = defineStore('auth', () => {
     const fullUser = await ($api as any)('/users/me')
     user.value = fullUser
   }
+  const isShuffle = ref(false)
 
-  return { token, user, isLoggedIn, login, register, logout, refreshUser }
+  const toggleShuffle = () => {
+    isShuffle.value = !isShuffle.value
+  }
+  const repeatMode = ref<'off' | 'all' | 'one'>('off')
+
+  const toggleRepeat = () => {
+    if (repeatMode.value === 'off') repeatMode.value = 'all'
+    else if (repeatMode.value === 'all') repeatMode.value = 'one'
+    else repeatMode.value = 'off'
+  }
+  return { token, user, isLoggedIn, login, register, logout, refreshUser,isShuffle,toggleShuffle, repeatMode, toggleRepeat }
 })

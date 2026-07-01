@@ -1,11 +1,14 @@
 <script setup lang="ts">
-import type { Song } from '~/composables/usePlayerStore'
+const { $api } = useNuxtApp()
 
-const { data: songs } = await useFetch<Song[]>('/api/songs')
+const { data: songs, refresh } = await useAsyncData<Song[]>(
+  'songs',
+  () => $api('/songs')
+)
 </script>
 
 <template>
-  <div>
+  <div> 
     <h1 class="text-2xl font-bold mb-6">Mới phát hành</h1>
 
     <div v-if="!songs?.length" class="text-center py-16 text-gray-400">
@@ -16,6 +19,6 @@ const { data: songs } = await useFetch<Song[]>('/api/songs')
       </NuxtLink>
     </div>
 
-    <SongList v-else :songs="songs" />
+    <SongList v-else :songs="songs" :refresh="refresh"/>
   </div>
 </template>

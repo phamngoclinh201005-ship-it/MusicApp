@@ -73,7 +73,9 @@ export default defineEventHandler(async (event) => {
     coverUrl: coverFileName ? `/uploads/${coverFileName}` : '/default-cover.png',
     duration: 0,
     uploadedBy: decoded.userId,
-    uploadedAt: new Date().toISOString()
+    uploadedAt: new Date().toISOString(),
+    like: 0,
+    likedUsers: [] as number[]
   }
 
   songs.push(newSong)
