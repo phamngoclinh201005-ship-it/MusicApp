@@ -19,7 +19,6 @@ const { data: profile, refresh } = await useAsyncData<UserProfile>('my-profile',
   api('/users/me')
 )
 
-// === Upload avatar ===
 const avatarInput = ref<HTMLInputElement | null>(null)
 const uploadingAvatar = ref(false)
 
@@ -88,35 +87,24 @@ const handleChangePassword = async () => {
     changingPassword.value = false
   }
 }
+const togglePasswordForm = () => {
+  showPasswordForm.value = !showPasswordForm.value
+}
 </script>
 
 <template>
   <div v-if="profile" class="max-w-3xl mx-auto">
-    <!-- Header profile -->
     <div class="flex items-center gap-6 mb-10">
       <div class="relative group">
-        <img
-          :src="profile.avatarUrl || 'https://api.dicebear.com/7.x/initials/svg?seed=' + profile.name"
-          class="w-28 h-28 rounded-full object-cover border-4 border-gray-800"
-        />
+        <img :src="profile.avatarUrl || 'https://api.dicebear.com/7.x/initials/svg?seed=' + profile.name"
+          class="w-28 h-28 rounded-full object-cover border-4 border-gray-800" />
         <button
           class="absolute inset-0 bg-black/60 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
-          :disabled="uploadingAvatar"
-          @click="triggerAvatarPicker"
-        >
-          <UIcon
-            :name="uploadingAvatar ? 'i-lucide-loader-2' : 'i-lucide-camera'"
-            class="w-7 h-7 text-white"
-            :class="{ 'animate-spin': uploadingAvatar }"
-          />
+          :disabled="uploadingAvatar" @click="triggerAvatarPicker">
+          <UIcon :name="uploadingAvatar ? 'i-lucide-loader-2' : 'i-lucide-camera'" class="w-7 h-7 text-white"
+            :class="{ 'animate-spin': uploadingAvatar }" />
         </button>
-        <input
-          ref="avatarInput"
-          type="file"
-          accept="image/*"
-          class="hidden"
-          @change="handleAvatarChange"
-        />
+        <input ref="avatarInput" type="file" accept="image/*" class="hidden" @change="handleAvatarChange" />
       </div>
 
       <div>
@@ -126,7 +114,6 @@ const handleChangePassword = async () => {
       </div>
     </div>
 
-    <!-- Thống kê -->
     <div class="grid grid-cols-2 gap-4 mb-10">
       <UCard>
         <div class="flex items-center gap-3">
@@ -153,7 +140,6 @@ const handleChangePassword = async () => {
       </UCard>
     </div>
 
-    <!-- Cài đặt tài khoản -->
     <UCard>
       <template #header>
         <h2 class="font-semibold text-black">Cài đặt tài khoản</h2>
@@ -165,12 +151,11 @@ const handleChangePassword = async () => {
             <p class="text-sm font-medium text-black">Mật khẩu</p>
             <p class="text-xs text-gray-400">Đổi mật khẩu đăng nhập của bạn</p>
           </div>
-          <UButton variant="outline" size="sm" @click="showPasswordForm = !showPasswordForm">
+          <UButton variant="outline" size="sm" @click="togglePasswordForm">
             {{ showPasswordForm ? 'Hủy' : 'Đổi mật khẩu' }}
           </UButton>
         </div>
 
-        <!-- Form đổi mật khẩu -->
         <div v-if="showPasswordForm" class="pt-2 border-t space-y-3">
           <UInput v-model="currentPassword" type="password" placeholder="Mật khẩu hiện tại" />
           <UInput v-model="newPassword" type="password" placeholder="Mật khẩu mới (tối thiểu 6 ký tự)" />

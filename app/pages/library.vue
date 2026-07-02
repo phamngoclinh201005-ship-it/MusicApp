@@ -32,16 +32,20 @@ const handleCreate = async () => {
     creating.value = false
   }
 }
+const toggleCreateForm = () => {
+  showCreateForm.value = !showCreateForm.value
+}
 </script>
 
 <template>
   <div>
     <div class="flex items-center justify-between mb-6">
       <h1 class="text-2xl font-bold">Thư viện của tôi</h1>
-      <UButton @click="showCreateForm = !showCreateForm">+ Tạo playlist</UButton>
+      <UButton @click="toggleCreateForm">
+        + Tạo playlist
+      </UButton>
     </div>
 
-    <!-- Form tạo playlist -->
     <UCard v-if="showCreateForm" class="mb-6 max-w-sm">
       <div class="flex gap-2">
         <UInput v-model="newPlaylistName" placeholder="Tên playlist" />
@@ -49,18 +53,13 @@ const handleCreate = async () => {
       </div>
     </UCard>
 
-    <!-- Danh sách playlist -->
     <div v-if="!playlists?.length" class="text-center py-16 text-gray-400">
       <p class="text-4xl mb-3">📁</p>
       <p>Bạn chưa có playlist nào</p>
     </div>
 
     <div v-else class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-      <NuxtLink
-        v-for="playlist in playlists"
-        :key="playlist.id"
-        :to="`/playlists/${playlist.id}`"
-      >
+      <NuxtLink v-for="playlist in playlists" :key="playlist.id" :to="`/playlists/${playlist.id}`">
         <UCard class="hover:bg-gray-800 transition-colors cursor-pointer">
           <div class="aspect-square bg-gray-700 rounded mb-3 flex items-center justify-center">
             <UIcon name="i-lucide-music" class="w-10 h-10 text-gray-400" />

@@ -14,11 +14,7 @@ const auth = useAuthStore()
         <UIcon name="i-lucide-home" class="w-5 h-5" />
         Trang chủ
       </NuxtLink>
-      <NuxtLink to="/search"
-        class="flex items-center gap-3 px-3 py-2 rounded text-gray-300 hover:text-white hover:bg-gray-800">
-        <UIcon name="i-lucide-search" class="w-5 h-5" />
-        Tìm kiếm
-      </NuxtLink>
+      
       <NuxtLink to="/library"
         class="flex items-center gap-3 px-3 py-2 rounded text-gray-300 hover:text-white hover:bg-gray-800">
         <UIcon name="i-lucide-library" class="w-5 h-5" />

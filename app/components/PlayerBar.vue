@@ -56,13 +56,12 @@ watchEffect(() => {
 
 <template>
   <div v-if="currentSong" class="flex flex-col">
-    <!-- Mini progress bar cho mobile -->
     <div class="h-0.5 bg-gray-700 sm:hidden">
       <div class="h-0.5 bg-primary" :style="{ width: progressPercent + '%' }" />
     </div>
 
     <div class="h-16 sm:h-20 bg-black/40 border-t border-white/5 flex items-center px-3 md:px-4 gap-2 md:gap-4">
-      <!-- Thông tin bài hát -->
+     
       <div class="flex items-center gap-2 md:gap-3 flex-1 sm:flex-none sm:w-40 md:w-64 min-w-0">
         <img :src="currentSong.coverUrl" class="w-10 h-10 md:w-12 md:h-12 rounded object-cover shrink-0" />
         <div class="overflow-hidden min-w-0">
@@ -71,7 +70,7 @@ watchEffect(() => {
         </div>
       </div>
 
-      <!-- Play/Pause mobile - nằm bên phải, chỉ hiện dưới sm -->
+    
       <button
         class="sm:hidden bg-white text-black rounded-full p-2.5 shrink-0"
         @click="player.togglePlay"
@@ -79,7 +78,6 @@ watchEffect(() => {
         <UIcon :name="isPlaying ? 'i-lucide-pause' : 'i-lucide-play'" class="w-4 h-4" />
       </button>
 
-      <!-- Controls đầy đủ - chỉ hiện từ sm trở lên -->
       <div class="hidden sm:flex flex-1 flex-col items-center gap-2 max-w-xl mx-auto">
         <div class="flex items-center gap-3 md:gap-4">
           <button
@@ -118,7 +116,6 @@ watchEffect(() => {
         </div>
       </div>
 
-      <!-- Volume - chỉ desktop -->
       <div class="hidden md:flex w-28 items-center gap-2 shrink-0">
         <UIcon name="i-lucide-volume-2" class="w-4 h-4 text-gray-400" />
         <input

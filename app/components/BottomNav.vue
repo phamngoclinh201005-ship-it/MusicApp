@@ -16,13 +16,14 @@ const isActive = (path: string) => route.path === path
       <span class="text-xs">Trang chủ</span>
     </NuxtLink>
 
+    
     <NuxtLink
-      to="/search"
+      to="/upload"
       class="flex flex-col items-center gap-1 px-3 py-1"
-      :class="isActive('/search') ? 'text-primary' : 'text-gray-400'"
+      :class="isActive('/upload') ? 'text-primary' : 'text-gray-400'"
     >
-      <UIcon name="i-lucide-search" class="w-5 h-5" />
-      <span class="text-xs">Tìm kiếm</span>
+        <UIcon name="i-lucide-upload" class="w-5 h-5" />
+        Tải nhạc lên
     </NuxtLink>
 
     <NuxtLink
